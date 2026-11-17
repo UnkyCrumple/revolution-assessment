@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Impact Lab: The American Revolution</title>
+<style>
+:root{--navy:#1B2A4A;--gold:#C9A227;--sage:#6E8B6A;--maroon:#7A2E3A;--fact:#F6F1E1;--alert:#F7E9EA;--row:#EEF1F6;--ink:#1d2433;--mute:#5b6577;--line:#d6dbe5;--fs:17px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fbfaf7;font-size:var(--fs);line-height:1.55}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;color:var(--navy);line-height:1.2;margin:0 0 .5em}
+h1{font-size:1.9em}h2{font-size:1.45em}h3{font-size:1.15em}
+a{color:#1f4f9a}
+button{font:inherit;cursor:pointer}
+.skip{position:absolute;left:-999px;top:0;background:#fff;padding:8px;z-index:50}.skip:focus{left:8px}
+header.top{background:var(--navy);color:#fff;border-bottom:4px solid var(--gold);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:20}
+header.top .brand{font-family:Georgia,serif;font-weight:bold;font-size:1.05em;color:#fff;text-decoration:none;margin-right:auto}
+header.top .brand small{display:block;font-family:Arial;font-weight:normal;color:#cfd6e6;font-size:.7em}
+header.top label{font-size:.75em;color:#cfd6e6;display:flex;flex-direction:column;gap:2px}
+header.top input{padding:5px 8px;border-radius:6px;border:1px solid #8a96b3;font:inherit;font-size:.85em;width:140px}
+.tbtn{background:transparent;border:1px solid #8a96b3;color:#fff;border-radius:6px;padding:5px 9px;font-size:.85em}
+.tbtn:hover,.tbtn:focus-visible{background:#2b3d66}
+.prog{height:6px;background:#2b3d66}.prog i{display:block;height:100%;background:var(--gold);width:0;transition:width .4s}
+main{max-width:980px;margin:0 auto;padding:22px 16px 80px}
+.crumb{font-size:.85em;margin-bottom:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 16px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.day{border-left:6px solid var(--gold);padding-left:12px;margin:26px 0 10px}
+.day small{color:var(--mute);font-weight:normal;font-family:Arial}
+.sec{display:flex;flex-direction:column;gap:6px;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:16px;color:inherit;text-decoration:none}
+.sec:hover,.sec:focus-visible{border-color:var(--navy)}
+.sec.lock{opacity:.55;pointer-events:none;background:#f1f1f1}
+.sec .ic{font-size:1.8em}
+.badge{display:inline-block;font-size:.72em;padding:2px 8px;border-radius:99px;background:var(--row);color:var(--navy);width:fit-content}
+.badge.done{background:var(--sage);color:#fff}
+.badge.gold{background:var(--gold);color:var(--navy)}
+.std{background:var(--fact);border:1px solid var(--gold);border-radius:8px;padding:10px 12px;font-size:.88em;margin:10px 0}
+.cer{background:var(--row);border-radius:10px;padding:12px 14px;margin:12px 0}
+.stopcard{display:flex;flex-direction:column;gap:6px;text-align:left;background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px;color:inherit;width:100%}
+.stopcard:hover,.stopcard:focus-visible{border-color:var(--navy)}
+.stopcard.pick{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.35)}
+.stopcard.rolling{border-color:var(--sage);background:#f4f8f3}
+.stopcard.mine{border-color:var(--sage)}
+.stopcard .ic{font-size:1.5em}
+.stopcard .hk{font-size:.86em;color:var(--mute)}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:bold}
+.btn:hover,.btn:focus-visible{background:#2b3d66}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.hook{font-family:Georgia,serif;font-size:1.15em;color:var(--maroon);margin:4px 0 14px}
+.read p{margin:0 0 .85em}
+.read b{color:var(--navy)}
+sup.c a{text-decoration:none;font-weight:bold;color:#1f4f9a;padding:0 1px}
+.words{background:var(--fact);border:1px solid var(--gold);border-radius:10px;padding:10px 14px;margin:0 0 14px}
+.words dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.words dt{font-weight:bold;color:var(--navy)}.words dd{margin:0}
+.hist{border-left:5px solid var(--sage);background:#f4f8f3;padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0}
+.hist b{color:var(--navy)}
+.look{background:var(--alert);border:1px solid var(--maroon);border-radius:10px;padding:10px 14px;margin:14px 0}
+.ev{list-style:none;padding:0;margin:0}
+.ev li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:8px;padding:8px 12px;margin:0 0 8px}
+.starters{font-size:.9em;color:var(--mute);margin:6px 0 10px;padding-left:18px}
+textarea{width:100%;min-height:92px;padding:10px;border:2px solid var(--line);border-radius:8px;font:inherit;resize:vertical}
+textarea:focus{outline:3px solid var(--gold);border-color:var(--navy)}
+.lab{font-weight:bold;color:var(--navy);display:block;margin:10px 0 4px}
+.wc{font-size:.78em;color:var(--mute)}
+.chk label{display:flex;gap:8px;align-items:flex-start;margin:6px 0;font-size:.92em}
+.chk input{margin-top:4px;width:18px;height:18px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.src ol{padding-left:22px;font-size:.88em}
+.teach{display:none;background:#eaf1ff;border:2px dashed var(--navy);border-radius:10px;padding:10px 14px;margin:14px 0;font-size:.9em}
+body.teacher .teach{display:block}
+.teach b.t{color:var(--navy);display:block;margin-bottom:4px}
+.note{font-size:.85em;color:var(--mute)}
+table{border-collapse:collapse;width:100%;font-size:.9em}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:var(--row)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:99px;z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.toast.on{opacity:1}
+.pre{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:.85em}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+footer.foot{text-align:center;padding:18px 0 28px;font-size:.8em}footer.foot a{color:#6b7488}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:600px){header.top input{width:100px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+ <a class="brand" href="#home">Impact Lab: The American Revolution<small>U.S. History I · Unit 3 · Standards 3.1–3.4</small></a>
+ <button class="tbtn" id="amin" aria-label="Smaller text">A−</button>
+ <button class="tbtn" id="aplus" aria-label="Larger text">A+</button>
+</header>
+<div class="prog" aria-hidden="true"><i id="pb"></i></div>
+<main id="main"></main>
+<footer class="foot"><a href="#teacher">Teacher</a></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/* ===== SOURCE LIBRARY: key -> [title, url] ===== */
+const SRC = {
+stamp:["History.com Editors, “Stamp Act”","https://www.history.com/articles/stamp-act"],
+riots:["History.com, “The Stamp Act Riots”","https://www.history.com/articles/the-stamp-act-riots"],
+tea2:["EBSCO Research Starters, “Tea Act of 1773”","https://ebsco.com/research-starters/history/tea-act-1773"],
+tea:["Our American Revolution, “The Boston Tea Party”","https://www.ouramericanrevolution.org/index.cfm/page/view/m0069"],
+intol:["American Battlefield Trust, “The Intolerable Acts”","https://www.battlefields.org/learn/articles/intolerable-acts"],
+cc1:["Massachusetts Historical Society, “The Coming of the American Revolution: The First Continental Congress”","https://masshist.org/revolution/congress1.php"],
+resolves:["Avalon Project (Yale Law School), Declaration and Resolves of the First Continental Congress (1774)","https://avalon.law.yale.edu/18th_century/resolves.asp"],
+assoc:["American Battlefield Trust, “The Articles of Association” (primary source)","https://www.battlefields.org/learn/primary-sources/articles-association"],
+encassoc:["Encyclopedia.com, “The Continental Association”","https://www.encyclopedia.com/history/educational-magazines/continental-association%7C"],
+npsfort:["National Park Service, “African Descended Soldiers at Fort Schuyler & in the Mohawk Valley”","https://www.nps.gov/articles/000/patriots-of-color-at-fort-schuyler-in-the-mohawk-valley.htm"],
+decl:["National Archives, “Declaration of Independence: A Transcription”","https://www.archives.gov/founding-docs/declaration-transcript"],
+jeffmonti:["Monticello, “Jefferson and the Declaration of Independence”","https://monticello.org/tje/788"],
+jeffclass:["Monticello Classroom, “Jefferson and Slavery” (middle school)","https://classroom.monticello.org/view/middle/75239"],
+abtfrance:["American Battlefield Trust, “The Tipping Point: How France Helped Win the American Revolution”","https://www.battlefields.org/learn/articles/how-france-helped-win-american-revolution"],
+abtfr2:["American Battlefield Trust, “France in the American Revolution”","https://www.battlefields.org/node/5378"],
+abtfrtopic:["American Battlefield Trust, “France and the American Revolution”","https://www.battlefields.org/learn/topics/france-and-american-revolution"],
+hnnfr:["History News Network, “Few Want to Admit It, but the French Saved America During the Revolution” (Tom Shachtman)","https://www.historynewsnetwork.org/article/few-want-to-admit-it-but-the-french-saved-america-"],
+henretta:["Macmillan Learning (textbook page), “The Patriot Advantage”","https://digfir-published.macmillanusa.com/henretta8e/henretta8e_ch6_16.html"],
+tap:["Macmillan Learning (textbook page), “Conclusion: Why the British Lost”","https://digfir-published.macmillanusa.com/tap6e/tap6e_ch7_33.html"],
+abtstrat:["American Battlefield Trust, “Revolutionary War Strategy”","https://battlefields.org/learn/articles/revolutionary-war-strategy"],
+abtsouth:["American Battlefield Trust, “10 Facts: Southern Campaign”","https://www.battlefields.org/learn/articles/10-facts-southern-campaign"],
+lumsouth:["Lumen Learning, U.S. History I, “War in the South”","https://courses.lumenlearning.com/wm-ushistory1/?p=198"],
+abtcamden:["American Battlefield Trust, “10 Facts: The Battle of Camden”","https://www.battlefields.org/learn/articles/10-facts-battle-camden"],
+npscowp:["National Park Service (Cowpens), “The Southern Campaign of the American Revolution”","https://www.nps.gov/cowp/learn/historyculture/southerncampaign.htm"],
+abtyork:["American Battlefield Trust, “Revolutionary War Yorktown”","https://battlefields.org/learn/articles/revolutionary-war-yorktown"],
+histyork:["History.com, “British surrender at Yorktown” (This Day in History, Oct. 19)","https://www.history.com/this-day-in-history/October-19/victory-at-yorktown"],
+hnnyork:["History News Network, article on Lafayette and Yorktown","https://historynewsnetwork.org/article/159479"],
+locparis:["Library of Congress (archived page), “Treaty of Paris”","https://webarchive.library.unt.edu/eot2008/20090109093641/http:/www.loc.gov/rr/program/bib/ourdocs/paris.html"],
+natparis:["National Archives, “Treaty of Paris (1783)”","https://www.archives.gov/milestone-documents/treaty-of-paris-0"],
+revhouse:["Paul Revere House, “The Midnight Ride in Paul Revere’s Own Words”","https://paulreverehouse.org/?p=458"],
+revalarm:["Massachusetts Historical Society, “The Alarm” (Object of the Month, April 2002)","https://masshist.org/objects/cabinet/april2002/april2002.htm"],
+revletter:["Massachusetts Historical Society, Letter from Paul Revere to Jeremy Belknap, circa 1798","https://masshist.org/database/99"],
+revnote:["Massachusetts Historical Society, Revere letter (Collections Online, essay page)","https://masshist.org/database/99?pid=15"],
+revtext:["Massachusetts Historical Society, transcription of Revere’s letter","https://masshist.org/objects/cabinet/april2002/reveretranscription.htm"],
+paine:["Colonial Williamsburg Journal (Autumn 2013), Susan Berg, “Common Sense Arguments for American Independence”","https://research.colonialwilliamsburg.org/Foundation/journal/Autumn13/paine.cfm"],
+cw1776:["Colonial Williamsburg, “1776” timeline","https://www.colonialwilliamsburg.org/discover/resource-hub/timelines/1776/"],
+abmck:["Macmillan Learning (textbook page), “Abigail Adams, ‘Remember the Ladies’”","https://digfir-published.macmillanusa.com/mckaywest12e/mckaywest12e_ch19_12.html"],
+abgbh:["GBH News, “Abigail Adams implored her husband to ‘remember the ladies.’ Here’s what she meant” (May 2026)","https://www.wgbh.org/news/local/2026-05-05/abigail-adams-implored-her-husband-to-remember-the-ladies-heres-what-she-meant"],
+abletters:["House Divided (Dickinson College), “Abigail and John Adams, Letters (1776)”","https://housedivided.dickinson.edu/sites/teagle/texts/abigail-and-john-adams-letters-1776/"],
+abjohn:["Hanover College History Dept., John Adams to Abigail Adams, April 14, 1776 (Massachusetts Historical Society electronic text)","https://history.hanover.edu/courses/excerpts/165adams-rtl.html"],
+absmith:["Smithsonian Magazine, “Abigail Adams Asked Her Husband to ‘Remember the Ladies’… Here’s What She Really Meant”","https://www.smithsonianmag.com/history/abigail-adams-asked-her-husband-to-remember-the-ladies-as-he-drafted-americas-laws-heres-what-she-really-meant-180988452/"],
+nypl:["New York Public Library, “A Closer Look at Jefferson’s Declaration”","https://www.nypl.org/blog/2012/07/02/closer-look-jeffersons-declaration"],
+locjeff:["Library of Congress (archived exhibit), “Declaration of Independence” (Jefferson exhibit)","https://webarchive.library.unt.edu/eot2008/20080916150055/http:/www.loc.gov/exhibits/jefferson/jeffdec.html"],
+jeffslave:["Monticello Classroom, “Jefferson and the Declaration of Independence”","https://classroom.monticello.org/?p=73758"],
+wom:["World History Encyclopedia (H. W. Mark), “Women in the American Revolution”","https://www.worldhistory.org/article/2453/"],
+ednc:["North Carolina Dept. of Natural and Cultural Resources, “Women of Edenton Resolve to Forego English Tea, 1774”","https://dncr.nc.gov/blog/2016/10/25/women-edenton-resolve-forego-english-tea-1774"],
+b1775:["Boston 1775 blog, “A Pledge from the Women of Edenton”","https://boston1775.blogspot.com/2017/12/a-pledge-from-women-of-edenton.html"],
+edmosaic:["MOSAIC NC, “Edenton Tea Party: Fact or Fiction?”","https://mosaicnc.org/edenton-tea-party/myths"],
+edcw:["Colonial Williamsburg, “A Society of Patriotic Ladies at Edenton in North Carolina” (1775 cartoon)","https://emuseum.colonialwilliamsburg.org/objects/16129/a-society-of-patriotic-ladies-at-edenton-in-north-carolina"],
+edtah:["Teaching American History, “Edenton Ladies’ Agreement” (primary source)","https://teachingamericanhistory.org/document/edenton-ladies-agreement/"],
+dunev:["Encyclopedia Virginia, “Lord Dunmore’s Ethiopian Regiment”","https://encyclopediavirginia.org/entries/lord-dunmores-ethiopian-regiment/"],
+duncw:["Colonial Williamsburg, “Dunmore’s Proclamation”","https://www.colonialwilliamsburg.org/discover/moments-in-history/road-to-independence/dunmores-proclamation/"],
+dunhist:["History.com (Christopher Klein), “How Enslaved Men Who Fought for the British Were Promised Freedom”","https://www.history.com/articles/the-ex-slaves-who-fought-with-the-british"],
+npsblack:["National Park Service, “Black Patriots: An Untold Story of the American Revolution”","https://www.nps.gov/articles/000/black-patriots-an-untold-story-of-the-american-revolution.htm"],
+nps1784:["National Park Service, “Treaty and Land Transaction of 1784”","https://home.nps.gov/articles/000/treaty-and-land-transaction-of-1784.htm"],
+smithnat:["Smithsonian Magazine, “Native Nations Fought in the American Revolution to Protect Their Ancestral Lands…”","https://www.smithsonianmag.com/history/native-nations-fought-in-the-american-revolution-to-protect-their-ancestral-lands-after-the-war-settlers-seized-their-territory-anyway-180988435/"],
+scholastic:["Scholastic Up Front, “Six Things You Probably Didn’t Know About the American Revolution”","https://upfront-aem-perf.scholastic.com/issues/2024-25/010625/six-things-you-probably-didn-t-know-about-the-american-revolution.html"],
+senwori:["National Park Service (Women’s Rights NHP), “Declaration Park and Waterwall”","https://www.nps.gov/wori/learn/historyculture/declaration-park-and-waterwall.htm"],
+senbrit:["Encyclopaedia Britannica, “Declaration of Sentiments”","https://www.britannica.com/event/Declaration-of-Sentiments"],
+senlfj:["Learning for Justice, “Declaration of Sentiments, Seneca Falls Conference, 1848”","https://archive.learningforjustice.org/classroom-resources/texts/declaration-of-sentiments-seneca-falls-conference-1848"],
+senneh:["NEH EDSITEment, “The Declaration of Sentiments by the Seneca Falls Conference (1848)”","https://edsitement.neh.gov/feature/declaration-sentiments-seneca-falls-conference-1848"],
+bens:["Ben’s Guide (U.S. Government Publishing Office), “The Gettysburg Address”","https://bensguide.gpo.gov/citizenship/50-age-9/journeyman-historical-documents/journeyman-gettysburg-address"],
+lincoln:["Abraham Lincoln Presidential Library and Museum, “The Gettysburg Address”","https://presidentlincoln.illinois.gov/GettysburgAddress"],
+ncc:["National Constitution Center, “The Gettysburg Address (1863)”","https://constitutioncenter.org/the-constitution/historic-document-library/detail/abraham-lincoln-the-gettysburg-address-1863"],
+locgett:["Library of Congress Magazine (May–June 2026), “‘Four Score and Seven Years Ago …’”","https://lcm.loc.gov/issue/may-june-2026/four-score-and-seven-years-ago/"],
+hnleutze:["HistoryNet, “What’s Wrong with ‘Washington Crossing the Delaware’”","https://historynet.com/whats-wrong-washington-crossing-delaware/"],
+met:["The Metropolitan Museum of Art, “Washington Crossing the Delaware” (object 11417)","https://www.metmuseum.org/art/collection/search/11417"],
+mhn:["Military History Now, “What’s Wrong With This Picture?” (2018)","https://militaryhistorynow.com/2018/12/22/whats-wrong-with-this-picture-seven-strange-facts-about-one-of-americas-most-iconic-paintings/"],
+lumart:["Lumen Learning, Art History, “Emanuel Leutze, Washington Crossing the Delaware”","https://courses.lumenlearning.com/suny-arthistory2/?p=876"],
+nmorr:["National Park Service (Morristown), “Frequently Asked Questions”","https://home.nps.gov/morr/faqs.htm"],
+raphael:["HistoryNet, Ray Raphael on Valley Forge and the Morristown winter","https://www.historynet.com/?p=13681906"],
+hnmorr:["HistoryNet, “Hallowed Ground: Morristown, New Jersey”","https://historynet.com/hallowed-ground-morristown-new-jersey/"],
+brexc:["Encyclopaedia Britannica, “American exceptionalism”","https://britannica.com/print/article/2219554"],
+ebexc:["EBSCO Research Starters, “American Exceptionalism”","https://ebsco.com/research-starters/political-science/american-exceptionalism"]
+};
+
+/* ===== STANDARDS (Utah Core, U.S. History I, Strand 3 — from USHistory1.pdf in the project) ===== */
+const STD = {
+1:"3.1 Use primary sources to identify the significant events, ideas, people, and methods used to justify or resist the Revolutionary movement.",
+2:"3.2 Compare and evaluate historians’ interpretations of significant events and factors affecting the course of the war and American victory.",
+3:"3.3 Use primary sources to compare contributions of key people and groups (Paul Revere, Thomas Paine, Abigail Adams, Sons and Daughters of Liberty, Thomas Jefferson).",
+4:"3.4 Explain how the ideas and events of the Revolution continue to shape American identity."
+};
+
+/* ===== SECTIONS ===== */
+const SECS = [
+{n:1,day:1,icon:"⚖️",title:"Why Resist? The Case for Rebellion",std:1,
+ intro:"From 1765 to 1776, colonists argued about taxes, rights, and who gets to make the rules. Some used petitions. Some used boycotts. Some used crowds. In this section you explore ONE moment and decide: were the colonists justified in resisting?",
+ q:"Were the colonists justified in resisting British rule? Use the stop you chose.",
+ starters:["I claim that the colonists were (fully / partly / not) justified because…","One piece of evidence from my stop is… (source #)","This evidence shows… because…","Someone could disagree because… but…"],
+ strong:"Strong answers name a specific idea or method from the stop (for example consent, boycott, crowd pressure), quote or paraphrase a fact with its source number, and explain WHY that fact makes resistance fair or unfair. The best answers deal with a limit (property destroyed, a whole town punished, or who was left out)."},
+{n:2,day:1,icon:"⚔️",title:"How Did America Win? Historians Disagree",std:2,
+ intro:"Britain had the strongest army and navy in the world, yet America won. Historians do not all agree on why. Explore ONE part of the war, read what historians say about it, and decide how important it was.",
+ q:"How important was your stop to the American victory? Use at least one historian’s view and one fact.",
+ starters:["I claim that my stop was (the most important / one important / a smaller) reason America won because…","The historian ___ says… (source #)","A fact that supports this is… (source #)","Another historian or source sees it differently: … This matters because…"],
+ strong:"Strong answers use at least one named historian or source AND a fact, say how the two views agree or disagree, and explain whether the stop was a cause of victory or just one piece of a bigger story."},
+{n:3,day:2,icon:"✉️",title:"Who Made the Revolution? People and Groups",std:3,
+ intro:"Revolutions are made by many people, some famous and some almost forgotten. Explore ONE person or group through their own words or actions, then decide how much they mattered and who else counted.",
+ q:"How much did your person or group contribute to the Revolution? Use at least one primary source or firsthand fact from your stop.",
+ starters:["I claim that ___ contributed (a great deal / a moderate amount / a limited amount) because…","In their own words / actions, … (source #)","This shows… because…","Another group that also mattered was… because…"],
+ strong:"Strong answers use a primary source (a letter, pamphlet, proclamation, or signed statement) and tell what it shows about the person’s role. Look for a comparison with another person or group, and for noticing who had a voice and who did not."},
+{n:4,day:2,icon:"🗽",title:"What Does the Revolution Mean Today?",std:4,
+ intro:"The Revolution did not end in 1783. People keep using its words, pictures, and stories to say who “we” are. Explore ONE example and decide how the Revolution still shapes American identity.",
+ q:"How does your stop show the Revolution still shaping American identity? Who does the story include, and who does it leave out?",
+ starters:["I claim that the Revolution still shapes American identity by…","In my stop, … (source #)","This connects to identity because…","This story includes… but leaves out… which matters because…"],
+ strong:"Strong answers connect a specific example to an idea about who Americans think they are (equality, freedom, sacrifice, being special), use evidence with a source number, and notice who is included or left out. For exceptionalism, answers present more than one view fairly."}
+];
+
+/* ===== STOPS =====
+ fields: id, sec, name, icon, hook, read[], words[[term,def]], ev[], look, hist[[who,text]] (sec 2), src[keys], teach */
+const STOPS = [
+/* ---------- SECTION 1 ---------- */
+{id:"1a",sec:1,name:"The Stamp Act and the Sons of Liberty",icon:"📰",
+ hook:"Imagine paying a tax on every newspaper or deck of cards you buy, and no one you voted for ever agreed to it.",
+ read:[
+ "In March 1765, Parliament passed the Stamp Act. After that, newspapers, legal papers, licenses, and even playing cards needed a tax stamp. It was the first direct tax Parliament placed on the colonies.{1}",
+ "Colonists said only their own elected assemblies could tax them. In October 1765, delegates from nine colonies met in New York. It was the first time the colonies had acted together like this.{1}",
+ "Some colonists went further. Groups called the Sons of Liberty pressured the men chosen to sell the stamps. In Boston, protesters hung a stuffed figure of the stamp seller, Andrew Oliver, from a tree. He soon quit.{2} Across the colonies, stamp sellers were pressured to quit, and without sellers the tax could not be collected.{2}",
+ "Merchants also boycotted British goods. The boycotts hurt British businesses, so Parliament repealed the Stamp Act in March 1766. On the same day it passed the Declaratory Act, which said Parliament could make laws for the colonies “in all cases whatsoever.”{1}"],
+ words:[["direct tax","a tax paid straight to the government"],["repeal","to cancel a law"],["boycott","to refuse to buy something as a protest"],["assembly","a colony’s elected lawmaking group"]],
+ ev:["The Stamp Act was the first direct tax Parliament placed on the colonies.{1}","The Stamp Act Congress (nine colonies) said only their own elected assemblies could tax them.{1}","Pressure on stamp sellers meant the tax could not be collected.{2}","Boycotts hurt British businesses, and Parliament repealed the law in 1766. The Declaratory Act the same day claimed power over the colonies “in all cases whatsoever.”{1}"],
+ look:"Historians still debate the Sons of Liberty’s methods, which included frightening people and destroying property.{2} Is that part of “resisting,” or does it make the cause less justified? Does the idea (consent) deserve more credit than the method?",
+ src:["stamp","riots"],
+ teach:"Matrix Readings 6 and 7. Accuracy note carried from the Matrix: “terrorist” as a label for the Sons of Liberty is a modern, loaded word. Use it only as a word-choice discussion. Strong CERs separate the IDEA (consent) from the METHOD (pressure, property damage)."},
+{id:"1b",sec:1,name:"The Tea Party and the Intolerable Acts",icon:"🫖",
+ hook:"A big company gets a special deal, and buying its cheap product would mean accepting a rule you think is unfair. What do you do?",
+ read:[
+ "In 1773, Parliament passed the Tea Act to save the British East India Company. Its tea became cheaper than smuggled tea. But many Patriots said buying it meant accepting Parliament’s right to tax them without their consent.{1}",
+ "On December 16, 1773, a huge crowd met at Boston’s Old South Meeting House. The governor would not let the tea ships leave. That night, men disguised as Mohawk men boarded three ships and dumped 342 chests of tea into Boston Harbor. They destroyed only the tea.{2}",
+ "Many colonists cheered. In Britain, destroying private property was almost universally condemned. King George III and Parliament decided Boston must be punished.{2}",
+ "In 1774, Parliament passed four laws that colonists called the Intolerable Acts. The Boston Port Act closed the harbor until the town paid for the tea. The Massachusetts Government Act took away much of the colony’s charter, so the king, not voters, would choose members of the governor’s council.{3} Other colonies sent food and supplies to Boston, and leaders called for a meeting of all the colonies.{3}"],
+ words:[["monopoly","when one company controls all sales of a product"],["charter","an official document that sets up a colony’s government"],["consent","agreement or permission"]],
+ ev:["Men dumped 342 chests of tea into Boston Harbor. They destroyed only the tea.{2}","In Britain, destroying the tea was widely condemned as destroying private property.{2}","The Boston Port Act closed Boston Harbor until the town paid for the tea.{3}","The Government Act ended elected council members. The king would choose them.{3}","Many colonists argued the Port Act punished a whole town for what a few people did.{3}"],
+ look:"Was dumping the tea a fair protest? Was closing the harbor a fair punishment? Notice that your answers can be different for each.",
+ src:["tea2","tea","intol"],
+ teach:"Matrix Readings 12, 14, 15. Do not state a precise number of participants; the Matrix notes accounts range from about 60 to more than 100. The collective-punishment point gives students two-sided evidence for the CER."},
+{id:"1c",sec:1,name:"The First Continental Congress and the Boycott",icon:"🏛️",
+ hook:"Twelve colonies in one room. How do you get people who barely know each other to act as one?",
+ read:[
+ "After the Intolerable Acts, leaders agreed the colonies had to answer together. In September 1774, more than fifty delegates from twelve colonies met at Carpenters’ Hall in Philadelphia. Georgia did not take part because its royal governor blocked the vote to choose delegates.{1}",
+ "On October 14, Congress approved a Declaration and Resolves. It listed colonists’ rights and complaints. One resolve said that an army kept in a colony in peacetime, without its legislature’s consent, is against the law.{2}",
+ "Later that month, Congress approved the Continental Association. Starting December 1, 1774, colonists would stop buying British goods. Later, they would also stop selling goods to Britain if nothing changed. Local committees would enforce the boycott.{1}{3}",
+ "The Association also said colonists would “neither import nor purchase, any slave.”{4}"],
+ words:[["delegate","a person chosen to speak and vote for others"],["boycott","to refuse to buy something as a protest"],["standing army","an army kept ready in peacetime"]],
+ ev:["Delegates from twelve colonies met in 1774. Georgia’s royal governor blocked its delegates.{1}","The Resolves said a peacetime army in a colony without its legislature’s consent was against the law.{2}","The Association began a boycott of British goods on December 1, 1774, enforced by local committees.{1}{3}","The Association promised not to import or buy enslaved people.{4}"],
+ look:"A boycott uses buying power instead of weapons. Why might a group try a boycott first? Also think about this: the National Park Service estimates that about 450,000 of the roughly 500,000 people of African descent in the colonies were enslaved when the war began.{5} What does that add to the colonists’ talk about liberty?",
+ src:["cc1","resolves","assoc","encassoc","npsfort"],
+ teach:"Matrix Reading 16. Consent & Voice thread: delegates were picked by assemblies or conventions, and Georgia was blocked by its governor. The Matrix also notes the Galloway plan lost 6–5, so the delegates did not all agree. The “not import or purchase any slave” clause is cited from Encyclopedia.com’s excerpt; students can check the Avalon or ABT text of the Association."},
+{id:"1d",sec:1,name:"The Declaration of Independence: Making the Case",icon:"📜",
+ hook:"If you wanted the whole world to understand why you are breaking away, how would you build your argument?",
+ read:[
+ "On July 4, 1776, Congress approved the Declaration of Independence. It makes its case in three steps.",
+ "Step 1: Ideas. Governments get their “just powers from the consent of the governed.” If a government harms people’s rights, people have the right “to alter or to abolish it.”{1}",
+ "Step 2: Evidence. A long list of complaints against King George III. They include taxes imposed “without our Consent,” being denied trial by jury, and armies kept among the colonists. Some match events you studied, such as soldiers quartered among colonists and cutting off trade.{1}",
+ "Step 3: Conclusion. The colonies are, and have a right to be, “Free and Independent States.”{1}",
+ "But the promise of equality did not reach everyone. Jefferson wrote the first draft, and Congress cut his paragraph that blamed the king for the slave trade.{2}{3} Jefferson himself enslaved over six hundred people in his lifetime.{3} The Declaration also blames the king for stirring up “merciless Indian Savages” on the frontier. That is the document’s own harsh wording about Native people.{1}"],
+ words:[["consent","agreement or permission"],["abolish","to end something completely"],["grievance","a complaint about unfair treatment"]],
+ ev:["The Declaration says governments get their just powers “from the consent of the governed.”{1}","It lists complaints including taxes “without our Consent” and loss of trial by jury.{1}","Congress removed Jefferson’s paragraph criticizing the slave trade.{2}","Over his lifetime Jefferson enslaved more than 600 people.{3}"],
+ look:"The Declaration has an idea, evidence, and a conclusion. Is the evidence strong enough for the idea? And is the idea the same for everyone it names?",
+ src:["decl","jeffmonti","jeffclass"],
+ teach:"Utah guiding question: How does the Declaration make a case for a new nation? Portfolio bridge: the Declaration as a model for a student petition (idea, grievances, request). The “merciless Indian Savages” phrase is quoted from the National Archives transcript so students see the document’s own wording; frame it as the document’s language, not a fact."},
+/* ---------- SECTION 2 ---------- */
+{id:"2a",sec:2,name:"Saratoga and the French Alliance",icon:"🇫🇷",
+ hook:"Why would a king help rebels fight another king?",
+ read:[
+ "In 1777, American forces beat British General Burgoyne’s army at Saratoga, New York. The American Battlefield Trust calls this a turning point of the Revolution.{1}",
+ "France had been secretly helping since spring 1776, starting with gunpowder.{1} After news of Saratoga reached Paris, France agreed to open help. Benjamin Franklin helped make the treaties, which were signed on February 6, 1778.{1}",
+ "France’s reasons were practical. Some historians describe the American Revolution as part of a long rivalry between France and Britain called the “Second Hundred Years War.”{2} Over the war, France provided an estimated 12,000 soldiers and 32,000 sailors.{3}"],
+ words:[["alliance","an agreement to help each other"],["turning point","a moment when the direction of events changes"],["covert","secret"],["rival","a country or person competing against another"]],
+ ev:["Secret French aid began in spring 1776 with gunpowder.{1}","France signed treaties with the United States in February 1778, after Saratoga.{1}","France sent an estimated 12,000 soldiers and 32,000 sailors.{3}"],
+ hist:[["Tom Shachtman (author, How the French Saved America)","French aid was crucial and is often forgotten. But France did not join out of sympathy for the American Revolution or republican ideas. It acted for its own reasons.{4}"],["A college textbook, “The Patriot Advantage”","Historians admit British mistakes, but they also credit French aid and George Washington’s leadership. The textbook says the American people decided the outcome, especially the one-third of white colonists who were zealous Patriots.{5}"]],
+ look:"Both views agree France mattered. Where do they place the most credit: on France, or on the Americans themselves?",
+ src:["abtfrance","abtfr2","abtfrtopic","hnnfr","henretta"],
+ teach:"Standard 3.2 asks students to compare interpretations. ABT is a nonprofit with a preservation mission (see the Battle Briefing’s sourcing check). The textbook pages are cited by page title because no author is shown. These are secondary and popular sources, not journal articles. To raise rigor, upload historiography articles and I will add them here."},
+{id:"2b",sec:2,name:"Washington’s Army Survives",icon:"🏕️",
+ hook:"Can you win a war just by not losing?",
+ read:[
+ "The Continental Army was mostly farmers and merchants, not professional soldiers. Its inexperience put its existence at risk. So did its reliance on militia (citizen volunteers), who could be unreliable.{1}",
+ "After a string of defeats around New York in 1776, American leaders changed their plan.{1} The American Battlefield Trust sums up the new idea: “so long as the Continental Army existed in the field, the Revolution was alive.”{1}",
+ "Britain had problems too. Its supplies were uncertain. It also repeatedly left Loyalists (colonists loyal to the king) at the mercy of angry rebels.{2}"],
+ words:[["militia","citizen volunteers who fight for their community"],["Loyalist","a colonist who stayed loyal to the king"],["supply","food, weapons, and gear an army needs"]],
+ ev:["Most Continental soldiers were farmers and merchants, not professional soldiers.{1}","One article says the Revolution was alive as long as the army existed in the field.{1}","A textbook lists British supply trouble and neglect of Loyalists among reasons Britain lost.{2}"],
+ hist:[["American Battlefield Trust article (no author listed)","The army’s survival kept the Revolution alive even after defeats. Inexperience and shaky militia nearly ended it.{1}"],["A college textbook, “Conclusion: Why the British Lost”","A majority of colonists were neutral or loyal. So why did Britain lose? The textbook points to supply problems, mistreating Loyalists, and French help.{2}"],["A college textbook, “The Patriot Advantage”","Washington’s leadership helped the American side win.{3}"]],
+ look:"Did America win the war, or did Britain lose it? Why might both be partly true?",
+ src:["abtstrat","tap","henretta"],
+ teach:"The ABT strategy article has no listed author. Note that the two textbook pages give different pictures of Patriot strength (one-third zealous Patriots vs. a majority neutral or loyal); the point for students is that estimates differ. Pair with the Battle Briefing."},
+{id:"2c",sec:2,name:"The War in the South",icon:"🌴",
+ hook:"The war moves south, and so does the fighting between neighbors.",
+ read:[
+ "For the first four years, Britain focused on the Northern and Middle colonies. Then it tried a new plan in the South.{1} British forces captured Savannah, Georgia, in December 1778. In Georgia, thousands of enslaved people ran to the British side to escape slavery.{2}",
+ "In May 1780, the British took Charleston, South Carolina, and the American Southern Army surrendered.{3}",
+ "General Nathanael Greene lost many battles, but he pushed the British out of the interior and back to Charleston.{1} The Americans used a tactic called defense in depth: forming several lines of battle.{1}"],
+ words:[["campaign","a series of battles with one goal"],["defense in depth","setting up several lines of battle, one behind the other"],["surrender","to give up"]],
+ ev:["Britain captured Savannah in December 1778 and Charleston in May 1780.{2}{3}","Greene lost many battles but pushed the British back to Charleston.{1}","In Georgia, thousands of enslaved people ran to the British side.{2}"],
+ hist:[["National Park Service (Cowpens)","The Battle of Cowpens was the turning point of the war in the South.{4}"],["American Battlefield Trust","Greene’s defense in depth, a method used over many fights, is what pushed the British back.{1}"]],
+ look:"One source points to a single battle as the turning point. Another points to a method used again and again. Which explanation seems stronger to you?",
+ src:["abtsouth","lumsouth","abtcamden","npscowp"],
+ teach:"Fills the Battle Briefing’s follow-up gap (southern campaign). Phrase the British shift as “by 1778–79”; sources date it slightly differently. Do not state casualty numbers here; the ABT figures were flagged for review in the Battle Briefing."},
+{id:"2d",sec:2,name:"Yorktown and the Treaty of Paris",icon:"🚢",
+ hook:"Was the war over when the last big battle ended?",
+ read:[
+ "In fall 1781, British General Cornwallis and his army of about 9,000 were at Yorktown, Virginia.{1}",
+ "On September 5, a French fleet beat a British fleet at the Battle of the Capes. The British fleet had to leave Cornwallis behind. He was trapped.{1} Washington’s army and a French army marched south from New York, and French ships helped move troops down Chesapeake Bay.{2}",
+ "On October 19, 1781, Cornwallis surrendered. Sources give different numbers. One says about 8,000 surrendered.{2} Another describes Cornwallis’s army as 9,000 men.{1}",
+ "But the war did not officially end. Peace talks in Paris began in 1782 with Benjamin Franklin, John Jay, and John Adams. The Treaty of Paris was not signed until September 3, 1783.{3}{4}"],
+ words:[["siege","surrounding a place to force it to give up"],["fleet","a group of warships"],["treaty","a written agreement between countries"]],
+ ev:["A French fleet beat the British fleet on September 5, 1781, and trapped Cornwallis at Yorktown.{1}","Cornwallis surrendered on October 19, 1781.{1}","The Treaty of Paris was signed September 3, 1783, nearly two years after Yorktown.{3}{4}"],
+ hist:[["American Battlefield Trust","The French naval victory left Cornwallis trapped.{1}"],["A History News Network article","Counting sailors, about 29,000 French were at Yorktown, compared with about 12,000 Americans.{5}"],["Library of Congress","Peace talks began after Yorktown, but the treaty took until September 1783. Yorktown did not end the war by itself.{3}"]],
+ look:"Is Yorktown best called an American victory, a French victory, or an allied victory? Use the numbers and the dates.",
+ src:["abtyork","histyork","locparis","natparis","hnnyork"],
+ teach:"Numbers differ (History.com: 8,000 surrendered; ABT: 9,000-man army), so require students to say “numbers vary.” The HNN article’s author is not shown in the search record; cite by outlet. Utah standard 3.2 wants interpretations compared, so push students to name which source they are using."},
+/* ---------- SECTION 3 ---------- */
+{id:"3a",sec:3,name:"Paul Revere: The Ride and the Legend",icon:"🐎",
+ hook:"You have probably heard the poem. But what did Revere himself say happened?",
+ read:[
+ "Paul Revere was a Boston Patriot who worked as a messenger for the Massachusetts Provincial Congress.{1}",
+ "On April 18, 1775, Dr. Joseph Warren urged Revere to ride to Lexington to warn John Hancock and Samuel Adams that British troops were on the move.{2}",
+ "Revere wrote about that night three times. Two accounts, both from 1775, were requested by the Provincial Congress, which wanted proof that the British fired first. The third was a letter written about 23 years later to Jeremy Belknap of the Massachusetts Historical Society.{3}{2}",
+ "Revere’s role got little attention in history books until after his death in 1818. In 1863, Henry Wadsworth Longfellow wrote a poem that cast Revere as a national hero. The Massachusetts Historical Society calls it highly romanticized.{4}"],
+ words:[["deposition","a sworn statement about what you saw"],["express rider","a messenger who rides fast to carry news"],["romanticized","made to seem more heroic or beautiful than real life"]],
+ ev:["Revere wrote three accounts: two depositions in 1775 and a letter about 23 years later.{3}","The 1775 depositions were requested to prove the British fired first.{3}","Revere’s role was little noticed until after he died. Longfellow’s 1863 poem made him a hero.{4}"],
+ look:"Read Revere’s own letter (link in the sources: MHS transcription). Why might a deposition made in 1775 and a letter written in 1798 be different? Which would you trust more, and why?",
+ src:["revalarm","revletter","revhouse","revnote"],
+ teach:"Primary-source work: students can read the MHS transcription of Revere’s 1798 letter (masshist.org/objects/cabinet/april2002/reveretranscription.htm). I have NOT checked every detail of the ride (such as who reached Concord); read the transcription yourself before telling students more than is on this page. Fact Check Alert: Longfellow’s poem is a legend; rely on Revere’s own accounts."},
+{id:"3b",sec:3,name:"Thomas Paine and Common Sense",icon:"📘",
+ hook:"How do you convince people who never read pamphlets to support independence?",
+ read:[
+ "Thomas Paine was born in England in 1737. He arrived in Philadelphia in early 1775 and had been in North America only about a year when Common Sense came out.{1}",
+ "Common Sense was published in January 1776. Paine used plain, short, forceful sentences so ordinary colonists could follow him. He also used the Bible, which most readers knew well, to support his points.{1}",
+ "It could be read aloud in taverns and coffeehouses, so it reached people who never bought a copy. Historians estimate 50,000 to 120,000 copies were bought, and a second edition came a month later.{1}",
+ "Not everyone agreed. Letters arguing against Common Sense appeared during the first half of 1776.{2} Paine wrote: “We have it in our power to begin the world over again.”{2}"],
+ words:[["pamphlet","a short printed booklet about one topic"],["independence","freedom from another country’s rule"],["tavern","a place where people met to eat, drink, and talk"]],
+ ev:["Common Sense was published in January 1776, and 25 more editions followed within a year.{1}","Estimates of copies bought range from 50,000 to 120,000.{1}","Paine used plain language and Bible references so ordinary readers could follow.{1}","Letters opposing Common Sense appeared in early 1776.{2}"],
+ look:"Paine wrote for ordinary people, not just leaders. How does that connect to the idea that government needs “the consent of the governed”?",
+ src:["paine","cw1776"],
+ teach:"Primary source: students may read Paine’s own words through the Colonial Williamsburg link. The sales range is a teaching point (historians do not know exactly). Do not give a page count; sources vary."},
+{id:"3c",sec:3,name:"Abigail Adams: “Remember the Ladies”",icon:"💌",
+ hook:"What if the people writing the new laws left half the country out?",
+ read:[
+ "In March 1776, Abigail Adams was at home in Braintree, Massachusetts. Her husband John was in the Continental Congress in Philadelphia. She and the children were living through the British siege of Boston and a smallpox epidemic.{1}",
+ "On March 31, she wrote to John about the “new code of laws” Congress might make.{4} She asked him to “remember the ladies.” At that time, married women had few legal rights.{2} She also asked him not to put unlimited power into husbands’ hands.{2}",
+ "John answered on April 14: “I cannot but laugh” at her “extraordinary Code of Laws.” He wrote that men’s rule was “in full Force,” but “little more than Theory.”{5}{3}",
+ "Historians still discuss what she meant. Smithsonian Magazine notes her request was open-ended and is often misunderstood today.{4}"],
+ words:[["code of laws","a set of rules for a country"],["coverture","the old legal idea that a wife’s legal identity was covered by her husband’s"],["siege","surrounding a place to force it to give up"]],
+ ev:["Abigail Adams wrote to John on March 31, 1776, asking him to “remember the ladies.”{2}","In 1776, married women had few legal rights.{2}","John replied on April 14 that he “cannot but laugh.”{5}"],
+ look:"Abigail had no vote. How did she try to be heard? Compare her method with the Daughters of Liberty’s boycotts. Who in our school has a voice but no vote?",
+ src:["abmck","abgbh","abletters","absmith","abjohn"],
+ teach:"Primary source: full letters are in the Adams Family Papers (MHS) and the House Divided transcription. The Smithsonian piece is cited only for the fact that the request is read different ways; I have not summarized its argument. Portfolio bridge: voice without a vote."},
+{id:"3d",sec:3,name:"Thomas Jefferson and the Committee of Five",icon:"🪶",
+ hook:"Who wrote the Declaration: one man, or a whole room?",
+ read:[
+ "Congress named a Committee of Five: John Adams, Benjamin Franklin, Thomas Jefferson, Robert Livingston, and Roger Sherman. Jefferson wrote the first draft between June 11 and June 28, 1776, while staying in a bricklayer’s house on Market Street in Philadelphia.{1}",
+ "Jefferson is called the main author, but the committee and Congress changed his draft. The Library of Congress counts 86 changes.{2}{3}",
+ "One big cut was a paragraph that blamed the king for the slave trade. Monticello says slaveholding delegates from South Carolina and Georgia demanded its removal. Jefferson was unhappy about the cut.{4}{2}",
+ "Jefferson himself enslaved over six hundred people in his lifetime.{5}"],
+ words:[["draft","an early version of a piece of writing"],["committee","a small group chosen to do a job"],["slave trade","buying and selling people as property"]],
+ ev:["Jefferson wrote the first draft between June 11 and June 28, 1776.{1}","The draft got 86 changes from the committee and Congress.{3}","Congress cut a paragraph criticizing the slave trade.{2}{4}","Jefferson enslaved over 600 people in his lifetime.{5}"],
+ look:"Jefferson’s own recollection (in his Autobiography) was simple: the committee asked him to write it, and he did.{1} Does it matter whose idea each part was? What does the cut paragraph tell you about who the Declaration was written for?",
+ src:["nypl","jeffmonti","locjeff","jeffslave","jeffclass"],
+ teach:"Primary source: Jefferson’s rough draft with the cut passage is at the Library of Congress and NYPL. The “86 changes” count is the Library of Congress’s; some websites give different counts, so cite the source. Keep the focus on contribution plus contradiction."},
+{id:"3e",sec:3,name:"The Sons and Daughters of Liberty",icon:"🌳",
+ hook:"Some of the Revolution’s strongest power came from people who could not vote.",
+ read:[
+ "The Sons of Liberty began in 1765 as protest groups against the Stamp Act. They became a network for organizing protests and boycotts, and later helped plan the Boston Tea Party.{1}",
+ "Women could not vote or hold office, but they powered many boycotts. A boycott only works if families stop buying. Women held spinning bees, where 20 to 40 women or more spun yarn all day so families could wear homespun cloth instead of British fabric. Many were organized by the Daughters of Liberty.{2}",
+ "On October 25, 1774, fifty-one women in Edenton, North Carolina, signed a public statement supporting the boycott.{3}",
+ "Look closely at this primary source. Newspapers printed the women’s statement, including the Virginia Gazette and, in January 1775, a London paper.{4} Sources disagree on its exact words. One North Carolina history site says the resolves never named tea.{5} A 1775 London cartoon shows the women’s paper as a promise about drinking tea.{6}"],
+ words:[["homespun","cloth made at home instead of bought"],["spinning bee","a gathering to spin yarn together"],["resolve","a formal group decision or promise"]],
+ ev:["The Sons of Liberty organized protests and boycotts across the colonies.{1}","Women could not vote but powered boycotts through spinning bees and refusing British goods.{2}","Fifty-one women signed the Edenton statement on October 25, 1774.{3}","Sources disagree on whether the Edenton statement named tea.{5}{6}"],
+ look:"Compare the methods of the Sons and the Daughters. Which group did more to make the boycott work? Why would a British cartoonist make fun of the Edenton women?",
+ src:["riots","wom","ednc","edtah","edmosaic","edcw"],
+ teach:"Matrix Readings 7 and 13. Accuracy note carried from the Matrix: no reputable source found names Mercy Otis Warren as leader of the Daughters of Liberty; she was a playwright and satirist. Students can read the Edenton statement itself through source 4 (Teaching American History). The sources conflict about the tea wording, which is deliberate."},
+{id:"3f",sec:3,name:"Choosing Sides: Black Americans and Native Nations",icon:"⚖️",
+ hook:"The Declaration said “all men are created equal.” What did freedom mean if you were enslaved, or if your nation’s land was at stake?",
+ read:[
+ "In November 1775, Virginia’s royal governor, Lord Dunmore, promised freedom to enslaved people owned by Patriots if they escaped and fought for the British.{1} Colonial Williamsburg says it could free some people but was first a military move to help Dunmore regain control.{2} One estimate says upwards of 20,000 formerly enslaved people joined the British side.{3}",
+ "Black men also fought for the Patriots. At least 5,000 free and enslaved people of African descent served the Patriot cause.{4} Most served in integrated units, with equal pay and rations.{5} George Washington first ordered that Black men could not enlist.{3}",
+ "Native nations had to choose too. The Haudenosaunee (Six Nations) split. In broad terms, the Oneida and Tuscarora allied with the United States, and the Mohawk, Onondaga, Cayuga, and Seneca with Great Britain.{6} Historians say both sides pressured Native people to join.{7}",
+ "After the war, the United States dictated a treaty to the Six Nations in 1784, treating the four nations that sided with Britain as defeated enemies, which the National Park Service says they were not.{6}",
+ "Many colonists were also Loyalists or stayed neutral. Historians estimate between one-fifth and one-third of colonists were Loyalists.{8}"],
+ words:[["Loyalist","a colonist who stayed loyal to the king"],["neutral","not taking either side"],["proclamation","an official public order"]],
+ ev:["Dunmore’s Proclamation (Nov. 7, 1775) promised freedom to enslaved people of Patriots who fought for the British.{1}","At least 5,000 Black soldiers and sailors served the Patriot cause, mostly in integrated units.{4}{5}","The Oneida and Tuscarora allied with the United States. The Mohawk, Onondaga, Cayuga, and Seneca allied with Britain.{6}","Loyalists were between one-fifth and one-third of colonists, by historians’ estimates.{8}"],
+ look:"What led different people to choose different sides? For enslaved people and for Native nations, what did each side promise, and could they trust it?",
+ src:["dunev","duncw","dunhist","npsfort","npsblack","nps1784","smithnat","scholastic"],
+ teach:"Utah guiding question: What led some colonists to become Patriots, Loyalists, or neutral? This stop widens that to enslaved and Native people. Numbers are estimates, so teach “estimates differ.” The Haudenosaunee split is cited “in broad terms” per NPS."},
+/* ---------- SECTION 4 ---------- */
+{id:"4a",sec:4,name:"Seneca Falls (1848): Borrowing the Declaration",icon:"👩",
+ hook:"Why would reformers copy a 72-year-old document to ask for new rights?",
+ read:[
+ "In July 1848, the first Women’s Rights Convention met at the Wesleyan Chapel in Seneca Falls, New York.{1} Elizabeth Cady Stanton read the Declaration of Sentiments, and the convention then passed 12 resolutions.{2}",
+ "The Declaration of Sentiments copied the Declaration of Independence on purpose. It said “all men and women are created equal.”{1} Sixty-eight women and 32 men signed it.{3}",
+ "It used the Declaration’s own argument to ask for the same rights for women.{4}"],
+ words:[["sentiments","feelings and opinions"],["convention","a large meeting for a purpose"],["resolution","a formal statement of what a group wants"]],
+ ev:["The 1848 Declaration of Sentiments said “all men and women are created equal.”{1}","Sixty-eight women and 32 men signed.{3}","It was modeled on the Declaration of Independence.{1}{4}"],
+ look:"Which words did the writers keep, and which did they change? Why did borrowing the old document make the new demand stronger?",
+ src:["senwori","senbrit","senlfj","senneh"],
+ teach:"Then → Now thread: ideas from 1776 reused later. The sources are NPS, Britannica, Learning for Justice, and NEH EDSITEment; students can compare the two texts side by side using the NEH page."},
+{id:"4b",sec:4,name:"Gettysburg (1863): “Four Score and Seven Years Ago”",icon:"🕊️",
+ hook:"Why did Lincoln start a Civil War speech by going back to 1776?",
+ read:[
+ "On November 19, 1863, in the middle of the Civil War, President Abraham Lincoln spoke at the dedication of a soldiers’ cemetery. It was in Gettysburg, Pennsylvania.{1}",
+ "He began with “Four score and seven years ago.” A score is 20, so he meant 87 years earlier: 1776, the year of the Declaration of Independence.{1}{2}",
+ "Lincoln said the nation was “conceived in Liberty, and dedicated to the proposition that all men are created equal.”{3}",
+ "The National Constitution Center says Lincoln returned to those promises to commit the post-war nation to “a new birth of freedom.”{3} The Library of Congress also says the speech looks back to the Declaration.{4}"],
+ words:[["score","twenty"],["proposition","an idea put forward to be tested or proved"],["dedicate","to give or set apart for a purpose"]],
+ ev:["Lincoln’s “four score and seven years ago” points to 1776.{1}{2}","He said the nation was dedicated to the idea that all men are created equal.{3}","The speech was given in 1863 during the Civil War.{1}"],
+ look:"Lincoln dated the country from the Declaration (1776), not the Constitution (1787). Why might that choice matter for who counts as “American”?",
+ src:["bens","lincoln","ncc","locgett"],
+ teach:"Then → Now thread: students connect the Declaration’s equality claim to the Civil War and Reconstruction (Unit 7 foreshadowing). Teaching American History pairs this with a prompt about why Lincoln used 1776."},
+{id:"4c",sec:4,name:"Washington Crossing the Delaware: The Picture That Became the Story",icon:"🖼️",
+ hook:"Can one painting shape how a country remembers a night?",
+ read:[
+ "Emanuel Leutze, a German-American artist, painted Washington Crossing the Delaware in 1851. The crossing happened on the night of December 25–26, 1776, 75 years earlier.{1}",
+ "The Met says the painting has errors. The boats cross in the wrong direction, the ice chunks are too big, and there were no horses or artillery in the boats.{2} The flag shown, the Stars and Stripes, did not exist yet.{3}",
+ "The Met says the painting’s popular success has little to do with accuracy.{2} It first appeared in America in October 1851.{2} It was painted in Germany and shipped to New York.{4}",
+ "The Met page includes commentary by Scott Manning Stevens, an Akwesasne Mohawk cultural historian, who points out what the picture leaves out.{2}"],
+ words:[["inaccuracy","a mistake or something not true to the facts"],["icon","a famous image or symbol"],["propaganda","information spread to persuade people, often one-sided"]],
+ ev:["Leutze painted it in 1851, 75 years after the crossing.{1}","The Met lists inaccuracies: boats going the wrong way, ice too large, no horses or artillery.{2}","The Stars and Stripes in the painting did not exist yet.{3}"],
+ look:"If a painting is full of mistakes, why does it still feel true to many people? Why do some images become “the story” while others (such as the Morristown winter) do not?",
+ src:["hnleutze","met","mhn","lumart"],
+ teach:"Utah guiding question: why do Valley Forge and the Delaware crossing become major parts of the narrative when Morristown and the East River crossing do not? The East River crossing is not covered in this lab. Fact Check: say “painted in Germany” (Lumen Art History); check the Met page for Stevens’s full comments before quoting him. Source the flag claim to Military History Now (a popular site)."},
+{id:"4d",sec:4,name:"Valley Forge or Morristown: What We Remember",icon:"❄️",
+ hook:"Which winter was worse, and which one do you remember?",
+ read:[
+ "Most people have heard of Valley Forge, where the army camped in the winter of 1777–78. Far fewer know about Morristown, New Jersey, in 1779–80.{1}",
+ "The National Park Service says weather historians agree the 1779–80 winter at Morristown was the worst of the 18th century. Valley Forge’s winter was just average.{1}",
+ "Yet more soldiers died at Valley Forge: an estimated one to three thousand, compared with about one hundred at Morristown.{1} Another source gives 1,859 and 86.{3} The NPS says the problem at Valley Forge was the army’s inexperience.{1}",
+ "Why do we remember Valley Forge? The NPS says it is probably because more soldiers died there.{1} Historian Ray Raphael argues Valley Forge better fits the proud story the nation likes to tell, while Morristown is viewed as an embarrassment.{2}"],
+ words:[["encampment","a place where an army stays for a while"],["inexperience","not having done something before"],["myth","a popular story that is not fully true"]],
+ ev:["NPS: the 1779–80 Morristown winter was the worst of the 18th century. Valley Forge’s was average.{1}","Deaths: about 1,000 to 3,000 at Valley Forge and about 100 at Morristown (NPS).{1} Another source: 1,859 and 86.{3}","Ray Raphael says Valley Forge fits the triumphant story, while Morristown does not.{2}"],
+ look:"Two explanations for why we remember Valley Forge: deaths, or story fit. Which one convinces you more? What does “who decides what we remember” have to do with a school’s own history?",
+ src:["nmorr","raphael","hnmorr"],
+ teach:"Fact Check: death counts differ by source (NPS range 1,000–3,000; HistoryNet 1,859 vs. 86), so require students to say “estimates.” Raphael’s argument is his interpretation; present it as one view next to the NPS explanation."},
+{id:"4e",sec:4,name:"American Exceptionalism: Idea, Pride, or Problem?",icon:"💬",
+ hook:"Is the United States “exceptional,” and what does that word even mean?",
+ read:[
+ "“American exceptionalism” is the idea that the United States is unique. Some say it is even morally better than other countries, because of its history, ideas, or religion.{1} People often point to the country’s founding as the reason.{1}",
+ "In 1630, the Puritan leader John Winthrop pictured his community as a “city upon a hill,” a model for the world.{2} Many later speakers have used that image.{2}",
+ "The French writer Alexis de Tocqueville is widely cited as the first to call the United States “exceptional.” But Britannica says he used the word mostly in passing. It says the term was coined by communist activists in the 1920s and 1930s.{1}",
+ "Politicians often promote the idea, and many critics call it egocentric.{2}"],
+ words:[["exceptional","very unusual or special"],["egocentric","thinking mainly about yourself"],["model","an example others can copy"]],
+ ev:["Britannica defines American exceptionalism as the idea the U.S. is unique and even morally superior for historical, ideological, or religious reasons.{1}","Winthrop’s 1630 “city upon a hill” image is often connected to it.{2}","Britannica: Tocqueville’s use was incidental, and the modern term was coined in the 1920s and 1930s.{1}","Critics dismiss the idea as egocentric. Politicians often promote it.{2}"],
+ look:"Is there a way to love your country and still question this idea? Think about who the Revolution’s promises included in 1776, and who they did not. Does exceptionalism describe the ideals, the reality, or both?",
+ src:["brexc","ebexc"],
+ teach:"Standards ask for dialogue on American exceptionalism, so use the Day 2 debrief protocol. Present both views evenhandedly and offer no verdict. Students must support claims with the sources. Accept answers that disagree with each other if the evidence is sound."}
+];
+
+/* ===== DEBRIEF PROTOCOLS ===== */
+const DEBRIEF = {
+1:{title:"Day 1 Debrief (20 minutes)",sections:"Sections 1 and 2",steps:[
+ ["0–3 min","Silent re-read","Re-read your own CER. Underline your claim and circle the source number you used."],
+ ["3–9 min","Think–Pair–Share","Pair with someone who explored a DIFFERENT stop. Each person reads their claim and one piece of evidence. Partner asks: “What would change your mind?”"],
+ ["9–17 min","Whole-class discussion","Teacher records on the board. Question A: Which method of resistance was the most justified, and which was the least? Question B: Did America win the war, or did Britain lose it? Use evidence and name your source."],
+ ["17–20 min","Exit ticket","Write one sentence that begins: “I changed my mind about ___ because ___” or “I still think ___ because ___.”"]],
+ note:"Think–Pair–Share was introduced by Frank Lyman at the University of Maryland in 1981."},
+2:{title:"Day 2 Debrief (20 minutes)",sections:"Sections 3 and 4",steps:[
+ ["0–3 min","Silent re-read","Re-read your own CER. Mark whose voice your stop included and whose it left out."],
+ ["3–9 min","Think–Pair–Share","Pair with someone who explored a DIFFERENT stop. Share your claim and one piece of evidence. Partner asks: “Who is missing from this story?”"],
+ ["9–17 min","Whole-class discussion","Question A: What led different people to be Patriots, Loyalists, or neutral? Question B (dialogue norms below): What does American exceptionalism mean, and is it a helpful idea?"],
+ ["17–20 min","Portfolio bridge","Write one idea from this unit that our class or school could use in its own rules (for example, a petition that lists grievances, or a way to hear people who cannot vote)."]],
+ note:"Dialogue norms for exceptionalism: use evidence from your stop; restate a view you disagree with before responding; present at least two views fairly. The teacher gives no verdict."}
+};
+
+/* ===== DESIGN BASIS (references verified from project files and sources searched) ===== */
+const DESIGN = [
+["ICAP framework","Students construct their own explanation (CER) and then compare with a partner, which are the higher-engagement modes in the ICAP framework. Chi, M. T. H., & Boucher, N. S. (2023). Applying the ICAP framework to improve classroom learning (project file)."],
+["Multimedia principles","Each stop is one short chunk (segmenting). Word help comes first (pre-training). Key words are bold (signaling). No decoration beyond one icon per stop (coherence). Mayer’s 12 Principles of Multimedia Learning (project file)."],
+["CER writing","Claim–Evidence–Reasoning structure. McNeill, K. L., & Krajcik, J., Supporting Grade 5–8 Students in Constructing Explanations in Science; McNeill, Lizotte, Krajcik, & Marx (2006)."],
+["Think–Pair–Share","Lyman, F. (1981), University of Maryland. Used in both debriefs."],
+["Document-based inquiry","Students work from sourced documents and compare interpretations. Reisman, A. (2012). Cognition and Instruction, 30(1), 86–112."],
+["Fact Check Alerts","Specific warnings about myths and mistakes (Revere, Leutze, Edenton, Valley Forge). Butler, A. C., Zaromb, F. M., Lyle, K. B., & Roediger, H. L. (2009). Psychological Science, 20(9), 1161–1168."],
+["UDL supports","Choice of stop, random pick, read-aloud, text size, word help, sentence starters. CAST (2024), Universal Design for Learning Guidelines 3.0."],
+["Reading level","Student text was checked with the Flesch–Kincaid grade formula. Kincaid, J. P., Fishburne, R. P., Rogers, R. L., & Chissom, B. S. (1975). Derivation of new readability formulas. Navy Research Branch Report 8-75."]
+];
+
+/* ===== helpers ===== */
+const $=s=>document.querySelector(s);
+const KEY="revlab-v1";
+const LS={get(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}},set(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}};
+let S=Object.assign({unlock2:false,teacher:false,fs:17,sec:{},exit:{}},LS.get());
+S.sec=S.sec||{};S.exit=S.exit||{};
+const save=()=>LS.set(S);
+const secState=n=>(S.sec[n]=S.sec[n]||{stop:"",claim:"",ev:"",rsn:"",chk:[false,false,false,false],done:false});
+const words=t=>(t.trim().match(/\S+/g)||[]).length;
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const stopById=id=>STOPS.find(s=>s.id===id);
+const secBy=n=>SECS.find(s=>s.n===n);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2600)}
+const reduce=()=>window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* citations: {n} -> superscript link to stop.src[n-1] */
+function cite(text,stop){
+ return text.replace(/\{(\d+)\}/g,(m,n)=>{const k=stop.src[n-1];const s=SRC[k];if(!s)return"<sup class='c'>?</sup>";
+  return `<sup class="c"><a href="${s[1]}" target="_blank" rel="noopener" title="${esc(s[0])}" aria-label="Source ${n}: ${esc(s[0])}">${n}</a></sup>`});
+}
+function boldTerms(text,list){
+ let t=text;
+ list.forEach(([w])=>{const re=new RegExp("\\b("+w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")\\b","i");
+  if(!/<b>/.test(t)||true){t=t.replace(re,"<b>$1</b>")}});
+ return t;
+}
+const plain=t=>t.replace(/\{\d+\}/g,"");
+
+/* ===== gating ===== */
+function allowed(n){
+ if(S.teacher)return true;
+ if(n===1)return true;
+ if(n===2)return secState(1).done;
+ if(n===3)return !!S.unlock2;
+ if(n===4)return !!S.unlock2&&secState(3).done;
+ return false;
+}
+function why(n){
+ if(n===2)return"Finish Section 1 first.";
+ if(n===3)return"Opens on Day 2. Your teacher will open it.";
+ if(n===4)return S.unlock2?"Finish Section 3 first.":"Opens on Day 2. Your teacher will open it.";
+ return"";
+}
+const doneCount=()=>[1,2,3,4].filter(n=>secState(n).done).length;
+
+/* ===== views ===== */
+function viewHome(){
+ const d=n=>secState(n).done;
+ const card=n=>{const s=secBy(n);const ok=allowed(n);
+  const st=secState(n);const stop=st.stop?stopById(st.stop):null;
+  return `<a class="sec ${ok?"":"lock"}" href="#sec${n}" ${ok?"":'tabindex="-1" aria-disabled="true"'}>
+   <span class="ic" aria-hidden="true">${s.icon}</span><span class="badge">Section ${n} · Standard 3.${n}</span>
+   <h3 style="margin:0">${esc(s.title)}</h3>
+   <span class="note">${esc(s.intro.split(". ")[0])}.</span>
+   ${d(n)?'<span class="badge done">Done ✓</span>':(ok?(stop?`<span class="badge gold">In progress: ${esc(stop.name)}</span>`:'<span class="badge">Not started</span>'):`<span class="note">🔒 ${esc(why(n))}</span>`)}
+  </a>`};
+ const dbOK=n=>S.teacher||(n===1?d(2):d(4));
+ return `<h1>Impact Lab: The American Revolution</h1>
+ <p>Explore the Revolution one section at a time. In each section you pick <b>one stop</b>, read a short page, and write <b>one CER answer</b> (Claim, Evidence, Reasoning). Then you talk it over with your class.</p>
+ <div class="card"><h3>How it works</h3><ol>
+  <li><b>Pick</b> one stop. Can’t decide? Press the <b>🎲 Random pick</b> button.</li>
+  <li><b>Read</b> the short page. Tap the little numbers to see the sources.</li>
+  <li><b>Write</b> a Claim, Evidence, and Reasoning answer. Use the sentence starters.</li>
+  <li><b>Discuss</b> with a partner and the class at the end of each day (20 minutes).</li></ol>
+  <p class="note">Plan on about 25 minutes per section: about 10 to read and 12 to 15 to write. Your teacher may change this.</p></div>
+ <div class="day"><h2>Day 1 <small>Sections 1 and 2 · then a 20-minute debrief</small></h2></div>
+ <div class="grid g2">${card(1)}${card(2)}</div>
+ <p>${dbOK(1)?'<a class="btn gold" style="text-decoration:none;display:inline-block" href="#debrief1">Day 1 debrief →</a>':'<span class="note">🔒 The Day 1 debrief opens after Section 2.</span>'}</p>
+ <div class="day"><h2>Day 2 <small>Sections 3 and 4 · then a 20-minute debrief</small></h2></div>
+ <div class="grid g2">${card(3)}${card(4)}</div>
+ <p>${dbOK(2)?'<a class="btn gold" style="text-decoration:none;display:inline-block" href="#debrief2">Day 2 debrief →</a>':'<span class="note">🔒 The Day 2 debrief opens after Section 4.</span>'}</p>
+ <div class="row"><a class="btn ghost" style="text-decoration:none" href="#work">📋 My work</a><a class="btn ghost" style="text-decoration:none" href="#sources">📚 Sources and design</a>${S.teacher?'<a class="btn ghost" style="text-decoration:none" href="#guide">🧑‍🏫 Teacher guide</a>':""}</div>
+ <p class="note">Your answers are saved only in this browser. Use “My work” to copy them before you turn them in.</p>`;
+}
+
+function viewSection(n){
+ const s=secBy(n),st=secState(n);const stops=STOPS.filter(x=>x.sec===n);
+ const cards=stops.map(p=>`<button class="stopcard ${st.stop===p.id?"mine":""}" data-id="${p.id}" id="card-${p.id}">
+  <span class="ic" aria-hidden="true">${p.icon}</span><b>${esc(p.name)}</b><span class="hk">${esc(p.hook)}</span>
+  ${st.stop===p.id?'<span class="badge done">Your stop</span>':""}</button>`).join("");
+ const next=n<4?`<a class="btn gold" style="text-decoration:none" href="#${n===2?"debrief1":"sec"+(n+1)}">${n===2?"Day 1 debrief →":"Next: Section "+(n+1)+" →"}</a>`:`<a class="btn gold" style="text-decoration:none" href="#debrief2">Day 2 debrief →</a>`;
+ return `<div class="crumb"><a href="#home">← All sections</a></div>
+ <span class="badge">Section ${n} of 4 · Day ${s.day}</span>
+ <h1>${s.icon} ${esc(s.title)}</h1>
+ <div class="std"><b>Standard:</b> ${esc(STD[s.std])}</div>
+ <p>${esc(s.intro)}</p>
+ <div class="cer"><b>Your CER question:</b> ${esc(s.q)}</div>
+ <h2>Choose ONE stop</h2>
+ <p class="note">Pick the stop that interests you most. You will read it and write about it. Can’t pick? Let the dice choose.</p>
+ <div class="row"><button class="btn gold" id="rnd">🎲 Random pick</button><span id="rmsg" role="status" aria-live="polite"></span></div>
+ <div class="grid g2" id="stops">${cards}</div>
+ ${st.done?`<div class="card" style="margin-top:16px"><b>✓ Section ${n} is done.</b> You can reopen your stop to edit. ${next}</div>`:""}
+ ${S.teacher?`<div class="teach"><b class="t">Teacher: what strong answers include</b>${esc(s.strong)}<br><br><b>Starters shown to students:</b> ${s.starters.map(esc).join(" · ")}</div>`:""}`;
+}
+
+function viewStop(id){
+ const p=stopById(id);if(!p)return viewHome();
+ const s=secBy(p.sec),st=secState(p.sec);const mine=st.stop===p.id;
+ const wl=`<div class="words"><b>Word help</b><dl>${p.words.map(w=>`<dt>${esc(w[0])}</dt><dd>${esc(w[1])}</dd>`).join("")}</dl></div>`;
+ const read=p.read.map(t=>`<p>${cite(boldTerms(t,p.words),p)}</p>`).join("");
+ const hist=p.hist?`<h3>What historians say</h3>${p.hist.map(h=>`<div class="hist"><b>${esc(h[0])}:</b> ${cite(h[1],p)}</div>`).join("")}`:"";
+ const ev=`<h3>Evidence bank <span class="note">(use these in your CER)</span></h3><ul class="ev">${p.ev.map(e=>`<li>${cite(e,p)}</li>`).join("")}</ul>`;
+ const look=`<div class="look"><b>Look closer.</b> ${cite(p.look,p)}</div>`;
+ const srcs=`<div class="src"><h3>Sources</h3><ol>${p.src.map(k=>`<li><a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a></li>`).join("")}</ol></div>`;
+ const teach=`<div class="teach"><b class="t">Teacher notes</b>${esc(p.teach)}</div>`;
+ let cer;
+ if(!mine){
+  cer=`<div class="card"><b>Is this your stop?</b><p class="note">${st.stop?`You already chose “${esc(stopById(st.stop).name)}” for this section. If you switch, your written CER stays, so update it to match.`:"Choose it to unlock the CER writing box."}</p>
+  <button class="btn" id="mk">${st.stop?"Switch to this stop":"Make this my stop"}</button></div>`;
+ }else{
+  const chkL=["My claim answers the CER question.","I used at least one fact from my stop and wrote its source number.","My reasoning explains WHY the evidence supports my claim."].concat(p.sec===2?["I named a historian or source and said what they think."]:[]);
+  const nChk=chkL.length;
+  cer=`<div class="card" id="cerbox"><h2>Your CER</h2><div class="cer"><b>Question:</b> ${esc(s.q)}</div>
+  <ul class="starters">${s.starters.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  <label class="lab" for="f-claim">Claim <span class="note">(your answer)</span></label><textarea id="f-claim"></textarea><div class="wc" id="w-claim"></div>
+  <label class="lab" for="f-ev">Evidence <span class="note">(facts from your stop, with source numbers)</span></label><textarea id="f-ev"></textarea><div class="wc" id="w-ev"></div>
+  <label class="lab" for="f-rsn">Reasoning <span class="note">(explain why the evidence proves your claim)</span></label><textarea id="f-rsn"></textarea><div class="wc" id="w-rsn"></div>
+  <div class="chk"><b>Self-check</b>${chkL.map((c,i)=>`<label><input type="checkbox" data-i="${i}"> ${esc(c)}</label>`).join("")}</div>
+  <div class="row"><button class="btn ghost" id="cp">📋 Copy my CER</button><button class="btn gold" id="fin">${st.done?"Update and finish":"I’m done with Section "+p.sec}</button><span id="fmsg" class="note" role="status" aria-live="polite"></span></div>
+  <div id="cpfb"></div></div>`;
+ }
+ return `<div class="crumb"><a href="#home">All sections</a> › <a href="#sec${p.sec}">Section ${p.sec}</a> › ${esc(p.name)}</div>
+ <span class="badge">${mine?"Your stop":"Viewing"}</span>
+ <h1>${p.icon} ${esc(p.name)}</h1>
+ <p class="hook">${esc(p.hook)}</p>
+ <div class="row"><button class="btn ghost" id="tts" hidden>🔊 Listen</button></div>
+ ${wl}<div class="read">${read}</div>${hist}${ev}${look}${cer}${srcs}${teach}`;
+}
+
+function viewDebrief(d){
+ const D=DEBRIEF[d];
+ const q=S.exit[d]||"";
+ return `<div class="crumb"><a href="#home">← All sections</a></div>
+ <h1>🗣️ ${esc(D.title)}</h1><p><b>${esc(D.sections)}.</b> Bring your CER.</p>
+ <table><tr><th>Time</th><th>Step</th><th>What to do</th></tr>${D.steps.map(r=>`<tr><td>${esc(r[0])}</td><td><b>${esc(r[1])}</b></td><td>${esc(r[2])}</td></tr>`).join("")}</table>
+ <p class="note">${esc(D.note)}</p>
+ <div class="card"><label class="lab" for="exit">Your exit ticket</label><textarea id="exit"></textarea><div class="row"><button class="btn ghost" id="cpx">📋 Copy</button></div></div>
+ ${S.teacher?`<div class="teach"><b class="t">Teacher</b>Timing is about 20 minutes. Think–Pair–Share is from Frank Lyman (University of Maryland, 1981). For Day 2, remind students of the dialogue norms before Question B. Collect exit tickets as a quick check.</div>`:""}`;
+}
+
+function buildWork(){
+ let t="";
+ t+="Impact Lab: The American Revolution\n\n";
+ SECS.forEach(s=>{const st=secState(s.n);const p=st.stop?stopById(st.stop):null;
+  t+=`SECTION ${s.n}: ${s.title}\nQuestion: ${s.q}\nStop: ${p?p.name:"(none chosen)"}\n`;
+  t+=`Claim: ${st.claim||""}\nEvidence: ${st.ev||""}\nReasoning: ${st.rsn||""}\n\n`;});
+ [1,2].forEach(d=>{if(S.exit[d])t+=`DAY ${d} EXIT TICKET: ${S.exit[d]}\n`});
+ return t.trim();
+}
+function viewWork(){
+ const blocks=SECS.map(s=>{const st=secState(s.n);const p=st.stop?stopById(st.stop):null;
+  return `<div class="card"><span class="badge ${st.done?"done":""}">${st.done?"Done ✓":"In progress"}</span><h3>Section ${s.n}: ${esc(s.title)}</h3>
+  <p class="note">Stop: ${p?esc(p.name):"none chosen yet"}</p>
+  <p><b>Claim:</b> ${esc(st.claim||"—")}</p><p><b>Evidence:</b> ${esc(st.ev||"—")}</p><p><b>Reasoning:</b> ${esc(st.rsn||"—")}</p></div>`}).join("");
+ return `<div class="crumb"><a href="#home">← All sections</a></div><h1>📋 My work</h1>${blocks}
+ <div class="row"><button class="btn gold" id="cpall">📋 Copy all my work</button></div><div id="cpfb"></div>`;
+}
+
+function viewSources(){
+ const used=[...new Set(STOPS.flatMap(s=>s.src))];
+ const byStop=STOPS.map(p=>`<li><b>${esc(p.name)}</b>: ${p.src.map((k,i)=>`<a href="${SRC[k][1]}" target="_blank" rel="noopener">${i+1}</a>`).join(", ")}</li>`).join("");
+ return `<div class="crumb"><a href="#home">← All sections</a></div><h1>📚 Sources and design</h1>
+ <div class="card"><h2>Why this lab is built this way</h2><table><tr><th>Design choice</th><th>Basis</th></tr>${DESIGN.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td></tr>`).join("")}</table></div>
+ <div class="card"><h2>Every source used (${used.length})</h2><ol>${used.map(k=>`<li><a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a></li>`).join("")}</ol></div>
+ <div class="card"><h2>Sources by stop</h2><ul>${byStop}</ul><p class="note">Numbers match the little superscript numbers on each stop page.</p></div>`;
+}
+
+function viewGuide(){
+ if(!S.teacher)return `<div class="card"><h2>Teacher guide</h2><p>Use the Teacher link at the bottom of the page and enter the teacher code.</p></div>`;
+ return `<div class="crumb"><a href="#home">← All sections</a></div><h1>🧑‍🏫 Teacher guide</h1>
+ <div class="card"><h2>Codes (pacing only, not security)</h2><p>Use the <b>Teacher</b> link at the bottom of any page. Enter <b>DAY2</b> to open Sections 3 and 4 on Day 2. Enter <b>TEACH</b> to turn on notes and open everything. Enter <b>STUDENT</b> to turn teacher view off. Each code is saved in that browser, so on Day 2 enter DAY2 on each device (or ask students to). Students can find these codes in the page source, so treat them as pacing tools.</p></div>
+ <div class="card"><h2>Pacing (estimates, check against your period length)</h2><table><tr><th>Day</th><th>Plan</th><th>Minutes</th></tr>
+ <tr><td>1</td><td>Intro (5), Section 1 (about 25), Section 2 (about 25), Debrief (20)</td><td>about 75</td></tr>
+ <tr><td>2</td><td>Section 3 (about 25), Section 4 (about 25), Debrief (20)</td><td>about 70</td></tr></table></div>
+ <div class="card"><h2>CER rubric (my adaptation, revise for your grading policy)</h2>
+ <table><tr><th></th><th>4 Extends</th><th>3 Meets</th><th>2 Approaching</th><th>1 Beginning</th></tr>
+ <tr><td><b>Claim</b></td><td>Clear answer that also names a limit or exception</td><td>Clear answer to the question</td><td>Vague or only partly answers</td><td>Missing or off topic</td></tr>
+ <tr><td><b>Evidence</b></td><td>Two or more accurate facts or quotes, with source numbers</td><td>At least one accurate fact with a source number</td><td>Fact with no source, or partly inaccurate</td><td>Opinion or no evidence</td></tr>
+ <tr><td><b>Reasoning</b></td><td>Explains why AND connects to another stop or to Consent &amp; Voice</td><td>Explains why the evidence supports the claim</td><td>Restates the evidence</td><td>Missing</td></tr>
+ <tr><td><b>Sources (Section 2)</b></td><td>Compares two historians or sources</td><td>Names one historian or source and says what they think</td><td>Mentions “historians” with no name</td><td>None</td></tr></table>
+ <p class="note">The CER framework comes from McNeill &amp; Krajcik (see Sources and design). This rubric is a draft I wrote from it. It is not from a published instrument.</p></div>
+ <div class="card"><h2>Fact Check Alerts to say out loud</h2><ul>
+ <li><b>Revere:</b> Longfellow’s 1863 poem is a legend. Use Revere’s own accounts.</li>
+ <li><b>Leutze painting:</b> painted 75 years later with known errors (Met).</li>
+ <li><b>Edenton:</b> sources disagree on whether the statement named tea.</li>
+ <li><b>Valley Forge vs. Morristown:</b> death counts differ by source, so call them estimates.</li>
+ <li><b>Numbers:</b> Yorktown surrender, Loyalist share, and Common Sense sales all vary by source.</li>
+ <li><b>Declaration wording:</b> “merciless Indian Savages” is the document’s language, not a fact about Native people.</li>
+ <li><b>Dunmore:</b> historians call it first a military move, not a plan to end slavery.</li>
+ <li><b>Sons of Liberty:</b> “terrorist” is a modern label. Discuss word choice.</li></ul>
+ <p class="note">Fact Check Alerts are based on Butler et al. (2009), Psychological Science 20(9).</p></div>
+ <div class="card"><h2>Known limits (please read)</h2><ul>
+ <li>Section 2 historians come from a popular history, a nonprofit (American Battlefield Trust), and textbook pages. They are secondary. Standard 3.2 would be stronger with journal articles; upload some and I will rebuild the stops.</li>
+ <li>The Revere stop does not retell the ride in detail. Read the MHS transcription before adding details.</li>
+ <li>Check the Met page for Scott Manning Stevens’s full comments before quoting him.</li>
+ <li>Reading level was checked with the Flesch–Kincaid formula and quoted primary sources raise it.</li></ul></div>
+ ${SECS.map(s=>`<div class="card"><h3>Section ${s.n}: what strong answers include</h3><p>${esc(s.strong)}</p></div>`).join("")}`;
+}
+
+/* ===== router ===== */
+function applyCode(raw){
+ const v=(raw||"").trim().toLowerCase();
+ if(v==="day2"){S.unlock2=true;save();toast("Day 2 unlocked");return true}
+ if(v==="teach"){S.teacher=true;S.unlock2=true;save();toast("Teacher view on");return true}
+ if(v==="student"){S.teacher=false;save();toast("Teacher view off");return true}
+ if(v)toast("That code did not work.");
+ return false;
+}
+function viewTeacher(){
+ return `<div class="crumb"><a href="#home">← All sections</a></div><h1>Teacher</h1><div class="card"><h2>Enter a code</h2><p class="note">Your teacher gives you this code. Students do not need this page.</p><label for="tc">Code</label><div class="row"><input id="tc" type="text" maxlength="12" autocomplete="off" style="padding:8px;border:1px solid #8a96b3;border-radius:6px;font:inherit"><button class="btn" id="tgo">Apply</button></div></div>`;
+}
+function route(){
+ const h=(location.hash||"#home").slice(1);
+ let html="",bind=()=>{};
+ try{
+  const mSec=h.match(/^sec([1-4])$/),mStop=h.match(/^stop-(\w+)$/),mDb=h.match(/^debrief([12])$/);
+  if(mSec){const n=+mSec[1];if(!allowed(n)){toast(why(n));location.hash="#home";return}html=viewSection(n);bind=()=>bindSection(n)}
+  else if(mStop){const p=stopById(mStop[1]);if(!p){location.hash="#home";return}if(!allowed(p.sec)){toast(why(p.sec));location.hash="#home";return}html=viewStop(p.id);bind=()=>bindStop(p)}
+  else if(mDb){html=viewDebrief(+mDb[1]);bind=()=>bindDebrief(+mDb[1])}
+  else if(h==="work"){html=viewWork();bind=bindWork}
+  else if(h==="sources")html=viewSources();
+  else if(h==="guide")html=viewGuide();
+  else if(h==="teacher"){html=viewTeacher();bind=()=>{const go=()=>{if(applyCode($("#tc").value)){location.hash="#home";route()}};$("#tgo").addEventListener("click",go);$("#tc").addEventListener("keydown",e=>{if(e.key==="Enter")go()})}}
+  else html=viewHome();
+ }catch(e){html=`<div class="card"><h2>Something went wrong</h2><p>${esc(e.message)}</p><a href="#home">Go home</a></div>`}
+ $("#main").innerHTML=html;bind();window.scrollTo(0,0);
+ $("#pb").style.width=(doneCount()/4*100)+"%";
+ document.body.classList.toggle("teacher",!!S.teacher);
+ if(window.speechSynthesis&&speechSynthesis.speaking)speechSynthesis.cancel();
+}
+
+/* ===== bindings ===== */
+function copyText(text,fbSel){
+ try{navigator.clipboard.writeText(text).then(()=>toast("Copied!"),()=>fallback(text,fbSel))}catch(e){fallback(text,fbSel)}
+}
+function fallback(text,sel){
+ const el=$(sel||"#cpfb");if(!el){toast("Copy not available here.");return}
+ el.innerHTML='<p class="note">Your browser blocked copying. Select all of this text and copy it yourself:</p><div class="pre" tabindex="0"></div>';
+ const box=el.querySelector(".pre");box.textContent=text;
+ try{const r=document.createRange();r.selectNodeContents(box);const sl=getSelection();sl.removeAllRanges();sl.addRange(r)}catch(e){}
+}
+function bindSection(n){
+ const stops=STOPS.filter(x=>x.sec===n);
+ document.querySelectorAll(".stopcard").forEach(b=>b.addEventListener("click",()=>{
+  const st=secState(n);if(!st.stop){st.stop=b.dataset.id;save()}
+  location.hash="#stop-"+b.dataset.id}));
+ $("#rnd").addEventListener("click",()=>{
+  const st=secState(n);const pool=stops.filter(x=>x.id!==st.stop||stops.length<2);
+  const final=pool[Math.floor(Math.random()*pool.length)];
+  const cards=stops.map(x=>$("#card-"+x.id));
+  const finish=()=>{cards.forEach(c=>c.classList.remove("rolling","pick"));$("#card-"+final.id).classList.add("pick");
+   $("#rmsg").innerHTML=`🎲 Your stop: <b>${esc(final.name)}</b> <button class="btn" id="go">Explore it</button>`;
+   $("#go").addEventListener("click",()=>{const s2=secState(n);if(!s2.stop){s2.stop=final.id}save();location.hash="#stop-"+final.id});
+   $("#go").focus()};
+  if(reduce()){finish();return}
+  $("#rnd").disabled=true;let i=0;const total=14;
+  const tick=()=>{cards.forEach(c=>c.classList.remove("rolling"));cards[i%cards.length].classList.add("rolling");i++;
+   if(i<total)setTimeout(tick,80+i*12);else{$("#rnd").disabled=false;finish()}};
+  tick();
+ });
+}
+function bindStop(p){
+ const n=p.sec,st=secState(n);
+ if(window.speechSynthesis){const b=$("#tts");b.hidden=false;
+  b.addEventListener("click",()=>{try{
+   if(speechSynthesis.speaking){speechSynthesis.cancel();b.textContent="🔊 Listen";return}
+   const txt=p.name+". "+p.hook+" "+p.read.map(plain).join(" ");
+   const u=new SpeechSynthesisUtterance(txt);u.rate=.95;u.onend=()=>{b.textContent="🔊 Listen"};
+   speechSynthesis.speak(u);b.textContent="⏹ Stop"}catch(e){toast("Read-aloud is not available.")}})}
+ const mk=$("#mk");if(mk){mk.addEventListener("click",()=>{st.stop=p.id;save();route()});return}
+ const f={claim:$("#f-claim"),ev:$("#f-ev"),rsn:$("#f-rsn")};
+ const upd=()=>{["claim","ev","rsn"].forEach(k=>{$("#w-"+k).textContent=words(f[k].value)+" words"})};
+ ["claim","ev","rsn"].forEach(k=>{f[k].value=st[k]||"";f[k].addEventListener("input",()=>{st[k]=f[k].value;save();upd()})});upd();
+ document.querySelectorAll(".chk input").forEach(c=>{c.checked=!!st.chk[+c.dataset.i];c.addEventListener("change",()=>{st.chk[+c.dataset.i]=c.checked;save()})});
+ const nChk=document.querySelectorAll(".chk input").length;
+ $("#cp").addEventListener("click",()=>{
+  const s=secBy(n);copyText(`Section ${n}: ${s.title}\nStop: ${p.name}\nQuestion: ${s.q}\nClaim: ${st.claim}\nEvidence: ${st.ev}\nReasoning: ${st.rsn}`)});
+ $("#fin").addEventListener("click",()=>{
+  const msg=$("#fmsg");const need=[];
+  if(words(st.claim)<4)need.push("a claim (at least 4 words)");
+  if(words(st.ev)<8)need.push("evidence (at least 8 words)");
+  if(words(st.rsn)<12)need.push("reasoning (at least 12 words)");
+  for(let i=0;i<nChk;i++)if(!st.chk[i]){need.push("all self-check boxes ticked");break}
+  if(need.length){msg.textContent="Still needed: "+need.join(", ")+".";return}
+  msg.textContent="";st.done=true;save();toast("Section "+n+" done! ✓");location.hash="#sec"+n});
+}
+function bindDebrief(d){
+ const t=$("#exit");t.value=S.exit[d]||"";t.addEventListener("input",()=>{S.exit[d]=t.value;save()});
+ $("#cpx").addEventListener("click",()=>copyText(t.value));
+}
+function bindWork(){$("#cpall").addEventListener("click",()=>copyText(buildWork()))}
+
+/* ===== header controls ===== */
+function applyFs(){document.documentElement.style.setProperty("--fs",S.fs+"px")}
+$("#amin").addEventListener("click",()=>{S.fs=Math.max(14,S.fs-1);save();applyFs()});
+$("#aplus").addEventListener("click",()=>{S.fs=Math.min(26,S.fs+1);save();applyFs()});
+window.addEventListener("hashchange",route);
+applyFs();route();
+</script>
+</body>
+</html>
