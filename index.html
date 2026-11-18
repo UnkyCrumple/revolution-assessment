@@ -507,12 +507,7 @@ const plain=t=>t.replace(/\{\d+\}/g,"");
 
 /* ===== gating ===== */
 function allowed(n){
- if(S.teacher)return true;
- if(n===1)return true;
- if(n===2)return secState(1).done;
- if(n===3)return true;
- if(n===4)return secState(3).done;
- return false;
+ return n>=1&&n<=4;
 }
 function why(n){
  if(n===2)return"Finish Section 1 first.";
@@ -532,7 +527,7 @@ function viewHome(){
    <span class="note">${esc(s.intro.split(". ")[0])}.</span>
    ${d(n)?'<span class="badge done">Done ✓</span>':(ok?(stop?`<span class="badge gold">In progress: ${esc(stop.name)}</span>`:'<span class="badge">Not started</span>'):`<span class="note">🔒 ${esc(why(n))}</span>`)}
   </a>`};
- const dbOK=n=>S.teacher||(n===1?d(2):d(4));
+ const dbOK=n=>true;
  return `<h1>Impact Lab: The American Revolution</h1>
  <p>Explore the Revolution one section at a time. In each section you pick <b>one stop</b>, read a short page, and write <b>one CER answer</b> (Claim, Evidence, Reasoning). Then you talk it over with your class.</p>
  <div class="card"><h3>How it works</h3><ol>
@@ -646,7 +641,7 @@ function viewSources(){
 function viewGuide(){
  if(!S.teacher)return `<div class="card"><h2>Teacher guide</h2><p>Use the Teacher link at the bottom of the page and enter the teacher code.</p></div>`;
  return `<div class="crumb"><a href="#home">← All sections</a></div><h1>🧑‍🏫 Teacher guide</h1>
- <div class="card"><h2>Codes (pacing only, not security)</h2><p>Use the <b>Teacher</b> link at the bottom of any page. Sections 3 and 4 are now open to students (Section 4 opens after Section 3 is finished). Enter <b>TEACH</b> to turn on notes and open everything. Enter <b>STUDENT</b> to turn teacher view off. Each code is saved in that browser. Students can find these codes in the page source, so treat them as pacing tools.</p></div>
+ <div class="card"><h2>Codes (pacing only, not security)</h2><p>Use the <b>Teacher</b> link at the bottom of any page. All sections and both debriefs are open to students from the start. Enter <b>TEACH</b> to turn on teacher notes. Enter <b>STUDENT</b> to turn teacher view off. Each code is saved in that browser. Students can find these codes in the page source, so treat them as pacing tools.</p></div>
  <div class="card"><h2>Pacing (estimates, check against your period length)</h2><table><tr><th>Day</th><th>Plan</th><th>Minutes</th></tr>
  <tr><td>1</td><td>Intro (5), Section 1 (about 25), Section 2 (about 25), Debrief (20)</td><td>about 75</td></tr>
  <tr><td>2</td><td>Section 3 (about 25), Section 4 (about 25), Debrief (20)</td><td>about 70</td></tr></table></div>

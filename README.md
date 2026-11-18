@@ -13,11 +13,11 @@ Open `index.html` in a browser. It has no dependencies and works offline. Studen
 
 ## Teacher access
 
-Sections 3 and 4 are open to students. Section 2 opens after Section 1 is finished, and Section 4 opens after Section 3 is finished.
+All four sections and both debriefs are open to students from the start.
 
 Use the small **Teacher** link at the bottom of any page and enter a code:
 
-- `TEACH` turns on teacher notes and opens everything.
+- `TEACH` turns on teacher notes.
 - `STUDENT` turns teacher view off.
 
 These codes are visible in the page source, so they are not security.
