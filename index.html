@@ -510,14 +510,13 @@ function allowed(n){
  if(S.teacher)return true;
  if(n===1)return true;
  if(n===2)return secState(1).done;
- if(n===3)return !!S.unlock2;
- if(n===4)return !!S.unlock2&&secState(3).done;
+ if(n===3)return true;
+ if(n===4)return secState(3).done;
  return false;
 }
 function why(n){
  if(n===2)return"Finish Section 1 first.";
- if(n===3)return"Opens on Day 2. Your teacher will open it.";
- if(n===4)return S.unlock2?"Finish Section 3 first.":"Opens on Day 2. Your teacher will open it.";
+ if(n===4)return"Finish Section 3 first.";
  return"";
 }
 const doneCount=()=>[1,2,3,4].filter(n=>secState(n).done).length;
@@ -647,7 +646,7 @@ function viewSources(){
 function viewGuide(){
  if(!S.teacher)return `<div class="card"><h2>Teacher guide</h2><p>Use the Teacher link at the bottom of the page and enter the teacher code.</p></div>`;
  return `<div class="crumb"><a href="#home">← All sections</a></div><h1>🧑‍🏫 Teacher guide</h1>
- <div class="card"><h2>Codes (pacing only, not security)</h2><p>Use the <b>Teacher</b> link at the bottom of any page. Enter <b>DAY2</b> to open Sections 3 and 4 on Day 2. Enter <b>TEACH</b> to turn on notes and open everything. Enter <b>STUDENT</b> to turn teacher view off. Each code is saved in that browser, so on Day 2 enter DAY2 on each device (or ask students to). Students can find these codes in the page source, so treat them as pacing tools.</p></div>
+ <div class="card"><h2>Codes (pacing only, not security)</h2><p>Use the <b>Teacher</b> link at the bottom of any page. Sections 3 and 4 are now open to students (Section 4 opens after Section 3 is finished). Enter <b>TEACH</b> to turn on notes and open everything. Enter <b>STUDENT</b> to turn teacher view off. Each code is saved in that browser. Students can find these codes in the page source, so treat them as pacing tools.</p></div>
  <div class="card"><h2>Pacing (estimates, check against your period length)</h2><table><tr><th>Day</th><th>Plan</th><th>Minutes</th></tr>
  <tr><td>1</td><td>Intro (5), Section 1 (about 25), Section 2 (about 25), Debrief (20)</td><td>about 75</td></tr>
  <tr><td>2</td><td>Section 3 (about 25), Section 4 (about 25), Debrief (20)</td><td>about 70</td></tr></table></div>
